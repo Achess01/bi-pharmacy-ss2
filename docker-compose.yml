@@ -1,0 +1,16 @@
+services:
+  postgres:
+    image: postgres:17
+    container_name: pharmacy-db
+    ports:
+      - "5434:5432"
+    environment:
+      POSTGRES_DB: pharmacy_emb
+      POSTGRES_USER: pharmacy_user
+      POSTGRES_PASSWORD: pharmacy_pass
+    volumes:
+      - pharmacy_data:/var/lib/postgresql/data
+    restart: always
+
+volumes:
+  pharmacy_data:
