@@ -10,6 +10,7 @@ services:
       POSTGRES_PASSWORD: pharmacy_pass
     volumes:
       - pharmacy_data:/var/lib/postgresql/data
+      - ./oltp/oltp-init.sql:/docker-entrypoint-initdb.d/oltp-init.sql:ro
     restart: always
 
 volumes:
