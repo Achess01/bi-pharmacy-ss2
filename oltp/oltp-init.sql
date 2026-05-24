@@ -155,7 +155,7 @@ CREATE TABLE ventas_encabezado (
 CREATE TABLE ventas_detalle (
     id_detalle SERIAL PRIMARY KEY,
     id_venta INT REFERENCES ventas_encabezado(id_venta),
-    id_producto_sku VARCHAR(50),
+    id_producto_sku VARCHAR(50) REFERENCES stock_local(id_producto_sku),
     cantidad INT,
     precio_unitario NUMERIC(10, 2)
 );
