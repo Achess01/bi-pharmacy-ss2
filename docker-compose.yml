@@ -16,7 +16,7 @@ services:
   superset:
     build:
       context: ./superset
-    container_name: superset_app
+    container_name: superset_app_pharmacy
     restart: unless-stopped
     depends_on:
       - postgres
