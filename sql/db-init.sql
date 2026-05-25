@@ -195,7 +195,7 @@ CREATE TABLE dim_producto (
 -- Dimensión Sucursal
 CREATE TABLE dim_sucursal (
     sucursal_key SERIAL PRIMARY KEY,
-    id_original_sucursal INT, -- El ID que viene de los POS
+    id_original_sucursal INT UNIQUE, -- El ID que viene de los POS
     nombre_sucursal VARCHAR(100),
     region VARCHAR(50), -- Oriente, Centro, Occidente, Norte, Sur
     departamento VARCHAR(50) -- Para decidir ubicación de nueva bodega
