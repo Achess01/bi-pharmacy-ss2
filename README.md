@@ -1,5 +1,15 @@
 # Proyecto BI: Farmacia
 
+**Autor:** Alexander Tzoc Alvarado
+
+**Curso:** Seminario de Sistemas 2
+
+**Stack Tecnológico:** Python (Pandas, SQLAlchemy) | PostgreSQL | Apache Superset
+
+**Repositorio:** [https://github.com/Achess01/bi-pharmacy-ss2](https://github.com/Achess01/bi-pharmacy-ss2)
+
+---
+
 ## Arquitectura del sistema
 ![Architecture](./docs/images/architecture.png)
 
@@ -68,7 +78,7 @@ El diseño se centró en convertir datos transaccionales dispersos en un modelo 
 * **Dimensiones:** Entidades descriptivas (`dim_producto`, `dim_tiempo`, `dim_sucursal`, `dim_laboratorio`) que permiten filtrar y segmentar la información.
 * **Hechos:** Tablas cuantitativas (`fact_ventas`, `fact_inventario`, `fact_produccion`) que almacenan métricas y llaves foráneas.
 
-![data marts](/docs/images/data_mart.png)
+![data marts](./docs/images/data_mart.png)
 
 * **Estrategia de ETL (Extract, Transform, Load):** Se decidió utilizar un enfoque **E-T-L basado en Python**. Python permite una limpieza de datos más profunda, manejo de excepciones y cálculos de negocio complejos fuera del motor de la base de datos para no afectar el rendimiento transaccional.
 * **Definición de Lógica de Negocio:** Se planificaron indicadores clave como el **Riesgo de Desabasto** (comparativa de stock vs. mínimo), la **Eficiencia de Producción** y la **Estacionalidad de Ventas**.
@@ -87,6 +97,8 @@ Aquí se en práctica la arquitectura mediante scripts de SQL y Python
 * **Integración con Apache Superset:** Se crearon los **Datasets virtuales** mediante consultas SQL complejas que unen las dimensiones con los hechos, preparando el terreno para la visualización final.
 
 ## Fase de comunicación
+
+**Dashboard de superset**
 
 ![dashboard](./docs/images/dashboard.jpg)
 
