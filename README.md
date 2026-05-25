@@ -98,9 +98,52 @@ Aquí se en práctica la arquitectura mediante scripts de SQL y Python
 
 ## Fase de comunicación
 
-**Dashboard de superset**
 
-![dashboard](./docs/images/dashboard.jpg)
+El objetivo de esta fase es compartir la información generada en el Data Warehouse, transformando los datos crudos en conocimiento para la toma de deciciones de **Enfermito Te Ves Mas Bonito**. Para ello, se diseñó un Dashboard en Apache Superset.
+
+A continuación, se detalla el catálogo de visualizaciones implementadas y los hallazgos clave de negocio:
+
+### 1. Evolución de Ventas y Picos Estacionales
+
+![Evolución de Ventas y Picos Estacionales](./docs/images/ventas.png)
+
+Tipo de Visualización: Gráfico de líneas
+
+Descripción: Compara el volumen de ventas a lo largo del tiempo, segmentado por las categorías de productos (Genérico, Marca Propia, Marca Externa).
+
+Se puede confirmar la estacionalidad del mercado. Se observa un pico de ventas entre julio y agosto (coincidiendo con la temporada de lluvias/enfermedades respiratorias), seguido de una estabilización a la baja a partir de septiembre. Esto dicta que los equipos de compras y producción deben adelantar el abastecimiento masivo durante los meses de mayo y junio para no perder oportunidades de venta.
+
+### 2. Alerta Operativa: Desabasto y Subutilización
+![Alerta Operativa: Desabasto y Subutilización](./docs/images/labs.png)
+
+Tipo de Visualización: Indicador numérico y Gráfico de barras.
+
+Descripción: Muestra el número total de transacciones con riesgo de desabasto y compara el porcentaje de eficiencia teórica entre los distintos laboratorios.
+
+El KPI de 1.06k ventas con riesgo de desabasto es una alerta roja sobre pérdidas económicas directas y posible insatisfacción del cliente.
+
+El análisis de laboratorios revela un desbalance operativo: mientras el Lab Oriente está operando por encima de su capacidad teórica (posible sobrecarga o necesidad de expansión), los laboratorios Centro y Occidente presentan una notable subutilización. La acción inmediata es redistribuir las órdenes de producción para equilibrar la carga.
+
+### 3. Análisis Financiero: Costo por Stock Muerto
+![Análisis Financiero: Costo por Stock Muerto](./docs/images/stock.png)
+Tipo de Visualización: Gráfico de barras temporales.
+
+Descripción: Identifica los productos específicos que están generando el mayor costo de almacenamiento acumulado debido a la falta de rotación (días sin movimiento).
+
+Se detectan picos grandes de retención de inventario en medicamentos como el Paracetamol 500mg y el Antibiótico Premium, especialmente marcados en los meses de noviembre y febrero. Esto permite a gerencia diseñar promociones dirigidas o frenar inmediatamente las órdenes de compra de estos SKUs específicos.
+
+### 4. Evaluación de Infraestructura (Justificación de Nueva Bodega)
+![Evaluación de Infraestructura (Justificación de Nueva Bodega)](./docs/images/new_warehouse.png)
+
+Tipo de Visualización: Gráfico de barras
+
+Descripción: Desglosa la volumetría de ventas con riesgo de desabasto, cruzando la sucursal de origen con los productos específicos afectados.
+
+La Sucursal Central muestra un desabasto en múltiples familias de productos, lo que indica que la bodega actual no tiene la capacidad de picking o volumen para su propia zona.
+
+La Sucursal Xela presenta una falla logística aguda muy concentrada en un producto (LORATADINA), mientras que la Sucursal Zacapa tiene fallos consistentes.
+
+Decisión: Los datos evidencian que el sistema logístico centralizado actual está colapsando. La magnitud del riesgo generalizado justifica financieramente el estudio para abrir un nuevo nodo logístico, posiblemente enfocado en aliviar la carga del Centro y mejorar los tiempos de respuesta hacia Xela u Oriente.
 
 ## Fase de Operacionalización
 
