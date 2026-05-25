@@ -13,5 +13,33 @@ services:
       - ./sql/db-init.sql:/docker-entrypoint-initdb.d/db-init.sql:ro
     restart: always
 
+  superset:
+    build:
+      context: ./superset
+    container_name: superset_app
+    restart: unless-stopped
+    depends_on:
+      - postgres
+    ports:
+      - "8088:8088"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    environment:
+      SUPERSET_SECRET_KEY: ${SUPERSET_SECRET_KEY}
+      SUPERSET_CONFIG_PATH: /app/pythonpath/superset_config.py
+      SQLALCHEMY_DATABASE_URI: postgresql+psycopg2://pharmacy_user:pharmacy_pass@postgres:5432/pharmacy_emb
+      SUPERSET_ADMIN_USERNAME: ${SUPERSET_ADMIN_USERNAME}
+      SUPERSET_ADMIN_FIRSTNAME: ${SUPERSET_ADMIN_FIRSTNAME}
+      SUPERSET_ADMIN_LASTNAME: ${SUPERSET_ADMIN_LASTNAME}
+      SUPERSET_ADMIN_EMAIL: ${SUPERSET_ADMIN_EMAIL}
+      SUPERSET_ADMIN_PASSWORD: ${SUPERSET_ADMIN_PASSWORD}
+    command: ["/app/superset-init.sh"]
+    networks:
+      - pharmacy_network
+
 volumes:
   pharmacy_data:
+
+networks:
+  pharmacy_network:
+    driver: bridge
